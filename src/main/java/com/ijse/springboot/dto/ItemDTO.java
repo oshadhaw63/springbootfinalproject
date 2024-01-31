@@ -1,20 +1,14 @@
 package com.ijse.springboot.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ItemDTO {
-
-    private Long id;
     private String name;
-    private double price;
-    public int getQuantity() {
-        throw new UnsupportedOperationException("Unimplemented method 'getQuantity'");
+    private Double price;
+    private Double qty;
+    private Long categoryId;
+
+
     }
-    public Long getItemCategoryId() {
-        throw new UnsupportedOperationException("Unimplemented method 'getItemCategoryId'");
-    }
-}
-        
+

@@ -10,9 +10,9 @@ import com.ijse.springboot.entity.Item;
 @Service
 public interface ItemService {
     List<Item> getAllItems();
-    Item createItem(ItemDTO itemDTO);
+    Item createItem(Item item);
     static Item getItemById(Long id) {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'getItemById'");
     }
     Item updateItem(Long id, ItemDTO itemDTO);

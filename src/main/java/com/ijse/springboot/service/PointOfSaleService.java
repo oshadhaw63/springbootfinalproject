@@ -70,4 +70,14 @@ public class PointOfSaleService {
 
         return totalAmount;
     }
+
+    public void addToCart(Long itemId, int quantity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addToCart'");
+    }
+
+    public void updateStock(Long itemId, int quantity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateStock'");
+    }
 }

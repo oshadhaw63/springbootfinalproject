@@ -16,13 +16,13 @@ import com.ijse.springboot.repository.ItemRepository;
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
-    private ItemRepository itemRepository;
+    private static ItemRepository itemRepository;
 
     @Autowired
     private ItemCategoryRepository itemCategoryRepository;
 
     @Override
-    public List<Item> getAllItems() {
+    public static List<Item> getAllItems() {
         return itemRepository.findAll();
     }
 
@@ -34,7 +34,7 @@ public class ItemServiceImpl implements ItemService {
             Item item = new Item();
             item.setName(itemDTO.getName());
             item.setPrice(itemDTO.getPrice());
-            item.setQuantity(itemDTO.getQuantity());
+            item.setQuantity(itemDTO.getQty());
             item.setItemCategory(itemCategory);
 
             return itemRepository.save(item);
@@ -55,7 +55,7 @@ public class ItemServiceImpl implements ItemService {
         if (existingItem != null) {
             existingItem.setName(itemDTO.getName());
             existingItem.setPrice(itemDTO.getPrice());
-            existingItem.setQuantity(itemDTO.getQuantity());
+            existingItem.setQuantity(itemDTO.getQty());
             existingItem.setItemCategory(itemCategoryRepository.findById(itemDTO.getItemCategoryId()).orElse(null));
 
             return itemRepository.save(existingItem);
@@ -80,6 +80,9 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    @Override
+    public Item createItem(Item item) {
 
+        throw new UnsupportedOperationException("Unimplemented method 'createItem'");
+    }
 }
-
