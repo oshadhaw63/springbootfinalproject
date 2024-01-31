@@ -1,4 +1,6 @@
 package com.ijse.springboot.entity;
+import com.ijse.springboot.service.ItemService;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,9 +43,17 @@ public class CartItem {
         this.quantity = quantity;
     }
 
+    
     public int getPrice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrice'");
+
+        Item item = ItemService.getItemById(itemId);
+
+        if (item != null) {
+            return (int) (item.getPrice() * quantity);
+        } else {
+            return 0;
     }
 
+    }
 }
+

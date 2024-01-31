@@ -40,11 +40,11 @@ public class AuthController {
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
 
-        Authentication authentication = authenticationManager.authenticate(
+        Authentication authentication = (Authentication) authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
         );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication((org.springframework.security.core.Authentication) authentication);
 
         String token = jwtUtils.generateJwtToken(authentication);
 
