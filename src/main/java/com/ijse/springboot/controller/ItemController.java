@@ -32,6 +32,6 @@ public class ItemController {
 
     @GetMapping("/items/{id}")
     public Item getItemById(@PathVariable Long id) {
-        return itemService.getItemById(id);
+        return ItemService.getItemById(id);
     }
 }

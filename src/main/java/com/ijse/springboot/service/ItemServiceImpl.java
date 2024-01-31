@@ -80,9 +80,6 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-    @Override
-    public Item createItem(Item item) {
 
-        throw new UnsupportedOperationException("Unimplemented method 'createItem'");
-    }
 }
+

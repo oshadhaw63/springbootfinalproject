@@ -1,13 +1,14 @@
 package com.ijse.springboot.service;
 
 
-import com.ijse.springboot.entity.ItemCategory;
-import com.ijse.springboot.repository.ItemCategoryRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.ijse.springboot.entity.ItemCategory;
+import com.ijse.springboot.repository.ItemCategoryRepository;
 
 @Service
 public class ItemCategoryServiceImpl implements ItemCategoryService{
@@ -40,5 +41,23 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
         if (category.getName() == null || category.getName().trim().isEmpty()) {
             throw new IllegalArgumentException("Category name cannot be empty");
         }
+    }
+
+    @Override
+    public List<ItemCategory> getAllItemCategories() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllItemCategories'");
+    }
+
+    @Override
+    public ItemCategory createItemCategory(ItemCategory itemCategory) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createItemCategory'");
+    }
+
+    @Override
+    public ItemCategory getItemCategoryById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getItemCategoryById'");
     }
 }

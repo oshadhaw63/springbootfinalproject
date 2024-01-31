@@ -5,7 +5,6 @@ import java.security.Key;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.codec.Decoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -24,13 +23,16 @@ public class JwtUtils {
     @Value("${app.secret}")
     private String secret;
 
+    @Value("${app.jwtexpiration}")
+    private int jwtExpiration;
+
     private Key key() {
-        return Keys.hmacShaKeyFor(Decoder.BASE64.decode(secret));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(org.springframework.boot.autoconfigure.pulsar.PulsarProperties.Authentication authentication) {
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) ((Authentication) authentication).getPrincipal();
 
         return Jwts.builder()
             .setSubject(userDetails.getUsername())

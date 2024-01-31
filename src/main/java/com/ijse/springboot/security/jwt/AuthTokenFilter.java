@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -36,7 +35,7 @@ public class AuthTokenFilter<UserDetails, JwtUtils> extends OncePerRequestFilter
 
                 String username = ((Object) jwtUtils).getUsernameFromToken(jwt);
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username); //extracting username and password from Database
+                org.springframework.security.core.userdetails.UserDetails userDetails = userDetailsService.loadUserByUsername(username); //extracting username and password from Database
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()); //authenticating user from above credentials
 

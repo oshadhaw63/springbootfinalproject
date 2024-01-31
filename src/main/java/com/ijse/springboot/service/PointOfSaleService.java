@@ -1,8 +1,11 @@
 package com.ijse.springboot.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ijse.springboot.dto.AddToCartRequest;
-import com.ijse.springboot.dto.GenerateInvoiceRequest;
 import com.ijse.springboot.dto.UpdateStockRequest;
 import com.ijse.springboot.entity.CartItem;
 import com.ijse.springboot.entity.Invoice;
@@ -12,11 +15,6 @@ import com.ijse.springboot.repository.PointOfSaleTransactionRepository;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Getter
@@ -28,22 +26,23 @@ public class PointOfSaleService {
 
     @Autowired
     private ItemService itemService;
+    
+    @Autowired
+    private CartService cartService;
+
     @Autowired
     private StockService stockService;
 
     public List<PointOfSaleTransaction> getAllTransactions() {
-        
         return transactionRepository.findAll();
     }
 
     public void addToCart(AddToCartRequest addToCartRequest) {
-
         Item item = ItemService.getItemById(addToCartRequest.getItemId());
         CartItem cartItem = new CartItem();
         cartItem.setItemId(addToCartRequest.getItemId());
         cartItem.setQuantity(addToCartRequest.getQuantity());
-
-        CartService.addToCart(cartItem);
+        cartService.addToCart(cartItem);
     }
 
     public void updateStock(UpdateStockRequest updateStockRequest) {
@@ -51,12 +50,9 @@ public class PointOfSaleService {
     }
 
     public Long generateInvoice(List<CartItem> cartItems) {
-
-
-
         Invoice invoice = new Invoice();
-        invoice.setItems(cartItems.getCartItems());
-        invoice.setTotalAmount(calculateTotalAmount(cartItems.getCartItems()));
+        invoice.setItems(cartItems);
+        invoice.setTotalAmount(calculateTotalAmount(cartItems));
 
         Invoice savedInvoice = Invoice.save(invoice);
         return savedInvoice.getId();
@@ -67,27 +63,11 @@ public class PointOfSaleService {
 
         for (CartItem cartItem : cartItems) {
             Item item = ItemService.getItemById(cartItem.getItemId());
-            double price;
-            double itemPrice=price;
+            double itemPrice = item.getPrice();
             double itemTotal = itemPrice * cartItem.getQuantity();
             totalAmount += itemTotal;
         }
 
         return totalAmount;
-    }
-
-    public Long generateInvoice(List<CartItem> cartItems) {
-
-        throw new UnsupportedOperationException("Unimplemented method 'generateInvoice'");
-    }
-
-    public void updateStock(Long itemId, int quantitySold) {
-
-        throw new UnsupportedOperationException("Unimplemented method 'updateStock'");
-    }
-
-    public void addToCart(Long itemId, int quantity) {
-
-        throw new UnsupportedOperationException("Unimplemented method 'addToCart'");
     }
 }
