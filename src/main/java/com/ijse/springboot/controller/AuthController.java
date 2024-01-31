@@ -19,7 +19,7 @@ import com.ijse.springboot.security.jwt.JwtUtils;
 import com.ijse.springboot.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
     @Autowired

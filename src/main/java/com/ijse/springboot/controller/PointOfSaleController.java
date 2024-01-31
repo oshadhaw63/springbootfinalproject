@@ -1,20 +1,25 @@
 package com.ijse.springboot.controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ijse.springboot.dto.AddToCartRequest;
 import com.ijse.springboot.dto.GenerateInvoiceRequest;
 import com.ijse.springboot.dto.UpdateStockRequest;
 import com.ijse.springboot.entity.CartItem;
 import com.ijse.springboot.entity.PointOfSaleTransaction;
 import com.ijse.springboot.service.PointOfSaleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PointOfSaleController {
 
     @Autowired
